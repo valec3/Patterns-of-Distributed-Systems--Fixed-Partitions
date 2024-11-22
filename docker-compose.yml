@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  partition1:
+    build: .
+    ports:
+      - "8001:8000"
+    environment:
+      - PARTITION_ID=0
+    depends_on:
+      - redis
+
+  partition2:
+    build: .
+    ports:
+      - "8002:8000"
+    environment:
+      - PARTITION_ID=1
+    depends_on:
+      - redis
+
+  partition3:
+    build: .
+    ports:
+      - "8003:8000"
+    environment:
+      - PARTITION_ID=2
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
